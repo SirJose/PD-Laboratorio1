@@ -1,0 +1,14 @@
+split:
+  test_size: 0.2
+  random_state: 42
+
+preprocessing:
+  numeric: standard_scaler
+  categorical: one_hot
+
+models:
+  linear_regression: {}
+  random_forest:
+    n_estimators: [100, 200]
+    max_depth: [10, 20, null]
+  gradient_boosting: {}
