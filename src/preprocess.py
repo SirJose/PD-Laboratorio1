@@ -4,10 +4,19 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 
+def check_missing_values(data):
+    if data.isnull().sum().sum() > 0:
+        print("Warning: Missing values detected")
+        data = data.fillna(data.mean())  # Imputación de valores faltantes
+    return data
+
 def load_and_preprocess_data(filepath, params):
     # Cargar datos
     data = pd.read_csv(filepath)
     print("Columnas del dataset:", data.columns)
+
+    # Verificar valores faltantes y corregirlos
+    data = check_missing_values(data)
 
     # Dividir datos en características y variable objetivo
     X = data.drop('price', axis=1)
