@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 def check_missing_values(data):
     if data.isnull().sum().sum() > 0:
         print("Warning: Missing values detected")
-        data = data.fillna(data.mean())  # Imputación de valores faltantes
+        data = data.fillna(data.mean())
     return data
 
 def load_and_preprocess_data(filepath, params):

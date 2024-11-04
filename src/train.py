@@ -1,14 +1,14 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from joblib import dump
+from joblib import Parallel, delayed, dump
 import pandas as pd
 
 def train_models(X_train, y_train, X_test, y_test, params):
     models = {
         "Linear Regression": LinearRegression(),
-        "Random Forest": RandomForestRegressor(),
-        "Gradient Boosting": GradientBoostingRegressor()
+        "Random Forest": RandomForestRegressor(n_jobs=-1),  # Entrenamiento paralelo
+        "Gradient Boosting": GradientBoostingRegressor(n_iter_no_change=5, validation_fraction=0.1)  # Early stopping
     }
 
     model_results = []
