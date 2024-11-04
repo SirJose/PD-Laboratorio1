@@ -4,7 +4,7 @@ Laboratorio 1 del curso de Product Development.
 
 ## Link [GitHub repo](https://github.com/SirJose/PD-Laboratorio1)
 
-## Ultimo release [v1.0.1](https://github.com/SirJose/PD-Laboratorio1/releases/tag/v1.0.1)
+## Ultimo release [v1.1.0](https://github.com/SirJose/PD-Laboratorio1/releases/tag/v1.1.0)
 
 # Pasos
 Se deben ejecutar los siguientes comandos en el orden establecido a continuación:
