@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 ### 2. Descarga el dataset: 
 ```bash
-./download_data.sh
+gdown "https://drive.google.com/uc?id=1dfJnf-r6O0e8zo--BDOmlm5yN_fkumvs" -O data/data.csv
 ```
 - *Nota:* no pude hacer que `dvc` funcionara con `google drive`, asi que este comando es una alternativa para obtener el dataset desde mi google drive. En futuras ocasiones usare AWS. En caso de ocurrir algun error, por favor descargar el archivo manualmente (ver links abajo) y guardarlo en esta ubicacion: `data/data.csv`
 
@@ -24,7 +24,7 @@ pip install -r requirements.txt
 py pipeline.py
 ```
 
-### 
+### 4. Verificar que se crearon los modelos correspondientes en el folder `modelo/` y que se escribieron los resultados obtenidos en el folder `resultados/`
 
 # Dataset utilizado (.csv)
 - **Folder:** [Carpeta en Google Drive](https://drive.google.com/drive/folders/13o-r9HxIDKNRz8YQDL4TIc-qfvr1M8lj?usp=sharing)
