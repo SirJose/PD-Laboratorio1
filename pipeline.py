@@ -11,9 +11,11 @@ with open("params.yaml", "r") as file:
 # Cargar, explorar, visualizasr y preprocesar los datos
 X_train, X_test, y_train, y_test = load_and_preprocess_data("data/data.csv", params)
 
-# Paso 3, 4 y 5: 
-# Entrenar modelos
-models = train_models(X_train, y_train, X_test, y_test, params)
+# Paso 3: 
+# Entrenar modelos y obtener el mejor modelo
+trained_models, model_results = train_models(X_train, y_train, X_test, y_test, params)
 
-# Extra: Optimizar hiperparámetros
-best_models = optimize_hyperparameters(X_train, y_train, models, params)
+# Paso 4:
+# Optimizar hiperparámetros de los modelos entrenados
+best_models = optimize_hyperparameters(X_train, y_train, trained_models, params)
+print(f"\nMejores modelos optimizados:\n", best_models)

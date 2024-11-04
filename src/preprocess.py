@@ -13,7 +13,7 @@ def check_missing_values(data):
 def load_and_preprocess_data(filepath, params):
     # Cargar datos
     data = pd.read_csv(filepath)
-    print("Columnas del dataset:", data.columns)
+    print("\nColumnas del dataset:", data.columns)
 
     # Verificar valores faltantes y corregirlos
     data = check_missing_values(data)
@@ -25,14 +25,14 @@ def load_and_preprocess_data(filepath, params):
     # Dividir en conjuntos de entrenamiento y prueba
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=params['split']['test_size'], random_state=params['split']['random_state'])
 
-    print("Tamaño de los conjuntos de entrenamiento y prueba:", X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+    print("\nTamaño de los conjuntos de entrenamiento y prueba:", X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
     # Identificar variables numéricas y categóricas (excluyendo 'price')
     num_features = X.select_dtypes(include=['float64', 'int']).columns
     cat_features = X.select_dtypes(include=['object']).columns
 
-    print("Características numéricas:", num_features)
-    print("Características categóricas:", cat_features)
+    print("\nCaracterísticas numéricas:", num_features)
+    print("\nCaracterísticas categóricas:", cat_features)
 
     # Configurar preprocesamiento
     preprocessor = ColumnTransformer(
