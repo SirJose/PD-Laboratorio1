@@ -9,7 +9,7 @@ Se deben ejecutar los siguientes comandos en el orden establecido a continuació
 ```bash
 pip install -r requirements.txt
 ```
-2. Ejectuar `pipeline.py`:
+2. Ejectuar el archivo `pipeline.py`:
 ```bash
 python pipeline.py
 ```
