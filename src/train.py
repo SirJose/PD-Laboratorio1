@@ -1,7 +1,8 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from joblib import dump
+import pandas as pd
 
 def train_models(X_train, y_train, X_test, y_test, params):
     models = {
@@ -10,17 +11,43 @@ def train_models(X_train, y_train, X_test, y_test, params):
         "Gradient Boosting": GradientBoostingRegressor()
     }
 
-    model_results = {}
+    model_results = []
     trained_models = {}
 
     for model_name, model in models.items():
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         mse = mean_squared_error(y_test, y_pred)
-        model_results[model_name] = mse
-        trained_models[model_name] = model  # Guardar el modelo entrenado
+        mae = mean_absolute_error(y_test, y_pred)
+        r2 = r2_score(y_test, y_pred)
 
-        print(f"\n{model_name} - MSE: {mse}")
+        model_results.append({
+            "Model": model_name,
+            "MSE": mse,
+            "MAE": mae,
+            "R2": r2
+        })
+        trained_models[model_name] = model
+
+        print(f"\n{model_name} - MSE: {mse}, MAE: {mae}, R2: {r2}")
         dump(model, f'models/{model_name}.joblib')
 
-    return trained_models, model_results  # Retornar modelos y resultados
+    # Exportar resultados de métricas a CSV
+    results_df = pd.DataFrame(model_results)
+    results_df.to_csv("results/model_performance.csv", index=False)
+    
+    return trained_models, results_df
+
+def feature_importance(trained_models, feature_names):
+    for model_name, model in trained_models.items():
+        if hasattr(model, "feature_importances_"):
+            importances = model.feature_importances_
+            importance_df = pd.DataFrame({
+                "Feature": feature_names,
+                "Importance": importances
+            }).sort_values(by="Importance", ascending=False)
+            
+            # Guardar importancia de características en CSV
+            importance_df.to_csv(f"results/{model_name}_feature_importance.csv", index=False)
+            print(f"Importancia de características exportada para {model_name}")
+

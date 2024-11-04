@@ -25,14 +25,9 @@ def load_and_preprocess_data(filepath, params):
     # Dividir en conjuntos de entrenamiento y prueba
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=params['split']['test_size'], random_state=params['split']['random_state'])
 
-    print("\nTamaño de los conjuntos de entrenamiento y prueba:", X_train.shape, X_test.shape, y_train.shape, y_test.shape)
-
     # Identificar variables numéricas y categóricas (excluyendo 'price')
     num_features = X.select_dtypes(include=['float64', 'int']).columns
     cat_features = X.select_dtypes(include=['object']).columns
-
-    print("\nCaracterísticas numéricas:", num_features)
-    print("\nCaracterísticas categóricas:", cat_features)
 
     # Configurar preprocesamiento
     preprocessor = ColumnTransformer(
@@ -46,4 +41,8 @@ def load_and_preprocess_data(filepath, params):
     X_train = preprocessor.fit_transform(X_train)
     X_test = preprocessor.transform(X_test)
     
-    return X_train, X_test, y_train, y_test
+    # Obtener nombres de características transformadas
+    transformed_feature_names = preprocessor.get_feature_names_out()
+
+    return X_train, X_test, y_train, y_test, transformed_feature_names 
+
