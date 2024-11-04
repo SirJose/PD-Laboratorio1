@@ -2,6 +2,7 @@ import yaml
 from src.preprocess import load_and_preprocess_data
 from src.train import train_models, feature_importance
 from src.optimization import optimize_hyperparameters
+import gdown
 
 # Cargar parámetros desde params.yaml
 with open("params.yaml", "r") as file:
